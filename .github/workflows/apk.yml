@@ -44,7 +44,7 @@ jobs:
     - name: Collect APK files
       run: |
         mkdir -p artifacts
-        find . -name "*.apk" -exec mv {} artifacts/ \;
+        find . -name "*.aab" -exec mv {} artifacts/ \;
 
     - name: Upload APK artifacts
       uses: actions/upload-artifact@v2

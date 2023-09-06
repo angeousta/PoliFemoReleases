@@ -15,7 +15,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      run: |
+        git clone https://github.com/PoliNetworkOrg/PoliFemo.git
+        cd PoliFemo
 
     - name: Set up Node.js
       uses: actions/setup-node@v2

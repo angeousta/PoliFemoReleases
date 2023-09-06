@@ -39,11 +39,13 @@ jobs:
     - name: pwd & ls
       run: |
         pwd
-        ls -a
+        ls -la
 
     - name: Build APK
-      run: eas build --platform android --local
-
+      run: |
+        cd PoliFemo
+        eas build --platform android --local
+        
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:

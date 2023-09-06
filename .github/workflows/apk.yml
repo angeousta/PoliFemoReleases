@@ -34,9 +34,6 @@ jobs:
     - name: Install dependencies
       run: yarn
 
-    - name: Log in to Expo
-      run: npx eas login
-
     - name: Build APK
       run: npx eas build --platform android --local
 

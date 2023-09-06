@@ -15,9 +15,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      run: |
-        git clone https://github.com/PoliNetworkOrg/PoliFemo.git
-        cd PoliFemo
+      run: git clone https://github.com/PoliNetworkOrg/PoliFemo.git
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -33,17 +31,15 @@ jobs:
     - name: yarn
       run: corepack enable
 
-    - name: Install dependencies
-      run: yarn
-
     - name: pwd & ls
       run: |
         pwd
         ls -la
 
-    - name: Build APK
+    - name: Install dependencies & Build APK
       run: |
         cd PoliFemo
+        yarn
         eas build --platform android --local
         
     - name: Upload APK

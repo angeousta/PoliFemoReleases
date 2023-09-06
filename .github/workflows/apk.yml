@@ -37,7 +37,7 @@ jobs:
       run: yarn
 
     - name: Build APK
-      run: npx eas build --platform android --local
+      run: eas build --platform android --local
 
     - name: Upload APK
       uses: actions/upload-artifact@v2

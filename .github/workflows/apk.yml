@@ -52,6 +52,17 @@ jobs:
         name: apk-artifacts
         path: artifacts/
 
+
+    - name: Set unique tag name
+      id: set_tag
+      run: echo "TAG_NAME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+    - name: Create and Push Git Tag
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git tag -a ${{ env.TAG_NAME }} -m "Version ${{ env.TAG_NAME }}"
+        git push --tags
         
     - name: Create GitHub Release
       id: create_release

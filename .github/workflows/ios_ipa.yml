@@ -35,10 +35,12 @@ jobs:
        run: |
          pwd
          ls -la
-        
-     - name: Build iOS .ipa
-       run: eas build:ios
 
+     - name: Install dependencies & Build APK
+       run: |
+         cd PoliFemo
+         yarn
+         eas build --platform ios --local
 
   release:
     runs-on: ubuntu-latest

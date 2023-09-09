@@ -1,0 +1,53 @@
+name: Build and Release iOS .ipa
+
+on:
+  push:
+    branches:
+      - main # Replace with your main branch name
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Adjust the Node.js version as needed
+
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Log in to Expo
+        run: expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
+
+      - name: Build iOS .ipa
+        run: expo build:ios
+
+  release:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Download iOS build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: ios-artifact
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./ios/*.ipa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Release URL
+        run: echo "Release URL: ${{ steps.create_release.outputs.upload_url }}"

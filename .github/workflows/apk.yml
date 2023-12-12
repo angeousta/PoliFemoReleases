@@ -13,8 +13,13 @@ jobs:
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} 
 
     steps:
-    - name: Checkout code
-      run: git clone https://github.com/PoliNetworkOrg/PoliFemo.git
+
+    - name: Checkout external repository
+      uses: actions/checkout@v2
+      with:
+        repository: https://github.com/PoliNetworkOrg/PoliFemo.git  # Replace with the actual URL of the repository
+        ref: main  # Replace with the branch or commit you want to check out
+
 
     - name: Set up Node.js
       uses: actions/setup-node@v2

@@ -50,13 +50,13 @@ jobs:
       run: |
         mkdir -p artifacts
         find . -name "*.aab" -exec mv {} artifacts/ \;
+        find . -name "*.apk" -exec mv {} artifacts/ \;
 
     - name: Upload APK artifacts to action
       uses: actions/upload-artifact@v2
       with:
         name: apk-artifacts
         path: artifacts/
-
 
     - name: Set unique tag name
       id: set_tag
@@ -68,11 +68,15 @@ jobs:
         git config --local user.name "GitHub Action"
         git tag -a ${{ env.TAG_NAME }} -m "Version ${{ env.TAG_NAME }}"
         git push --tags
+        git push origin ${{ env.TAG_NAME }}
         
     - name: Create GitHub Release
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        files: artifacts/*.aab
+        tag_name: ${{ env.TAG_NAME }}
+        files: |
+          artifacts/*.aab
+          artifacts/*.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -36,11 +36,13 @@ jobs:
          pwd
          ls -la
 
-     - name: Install dependencies & Build APK
+     - name: Install dependencies
        run: |
          cd PoliFemo
          yarn
-         eas build --platform ios --local
+
+     - name: Build IPA
+       run: eas build --platform ios --local
 
   release:
     runs-on: ubuntu-latest

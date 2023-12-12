@@ -39,6 +39,9 @@ jobs:
       run: |
         pwd
         ls -la
+        
+    - name: git branch -r
+      run: git branch -r
 
     - name: Install dependencies
       run: yarn

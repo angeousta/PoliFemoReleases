@@ -17,7 +17,7 @@ jobs:
     - name: Checkout external repository
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/PoliNetworkOrg/PoliFemo.git  # Replace with the actual URL of the repository
+        repository: PoliNetworkOrg/PoliFemo  # Replace with the actual URL of the repository
         ref: main  # Replace with the branch or commit you want to check out
 
 

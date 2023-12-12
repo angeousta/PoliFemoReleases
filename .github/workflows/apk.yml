@@ -40,11 +40,11 @@ jobs:
         pwd
         ls -la
 
-    - name: Install dependencies & Build APK
-      run: |
-        cd PoliFemo
-        yarn
-        eas build --platform android --local
+    - name: Install dependencies
+      run: yarn
+
+    - name: Build APK
+      run: eas build --platform android --local
 
     - name: Collect APK files
       run: |
